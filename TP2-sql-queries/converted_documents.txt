@@ -1,0 +1,21 @@
+-- Table: public.converted_documents
+
+-- DROP TABLE IF EXISTS public.converted_documents;
+
+CREATE TABLE IF NOT EXISTS public.converted_documents
+(
+    id integer NOT NULL DEFAULT nextval('converted_documents_id_seq'::regclass),
+    src character varying(250) COLLATE pg_catalog."default" NOT NULL,
+    file_size bigint NOT NULL,
+    dst character varying(250) COLLATE pg_catalog."default" NOT NULL,
+    created_on timestamp without time zone NOT NULL DEFAULT now(),
+    updated_on timestamp without time zone NOT NULL DEFAULT now(),
+    CONSTRAINT converted_documents_pkey PRIMARY KEY (id),
+    CONSTRAINT converted_documents_dst_key UNIQUE (dst),
+    CONSTRAINT converted_documents_src_key UNIQUE (src)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.converted_documents
+    OWNER to "is";

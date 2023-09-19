@@ -1,0 +1,19 @@
+-- Table: public.imported_documents
+
+-- DROP TABLE IF EXISTS public.imported_documents;
+
+CREATE TABLE IF NOT EXISTS public.imported_documents
+(
+    id integer NOT NULL DEFAULT nextval('imported_documents_id_seq'::regclass),
+    file_name character varying(250) COLLATE pg_catalog."default" NOT NULL,
+    xml xml NOT NULL,
+    created_on timestamp without time zone NOT NULL DEFAULT now(),
+    updated_on timestamp without time zone NOT NULL DEFAULT now(),
+    CONSTRAINT imported_documents_pkey PRIMARY KEY (id),
+    CONSTRAINT imported_documents_file_name_key UNIQUE (file_name)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.imported_documents
+    OWNER to "is";
